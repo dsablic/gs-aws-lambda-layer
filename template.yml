@@ -17,14 +17,12 @@ Resources:
       Description: Ghostscript for AWS Lambda
       LayerName: ghostscript
       LicenseInfo: AGPL
-
   DeploymentPermission:
     Type: AWS::Lambda::LayerVersionPermission
     Properties:
       Action: lambda:GetLayerVersion
       LayerVersionArn: !Ref LambdaLayer
       Principal: !Ref AllowedPrincipal
-
 Outputs:
   LambdaLayer: 
     Value: !Ref LambdaLayer
