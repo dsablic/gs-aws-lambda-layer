@@ -29,7 +29,7 @@ build/ghostscript/lib:
 
 build/ghostscript: check_vars build/ghostscript/bin build/ghostscript/lib
 
-deploy:# build/ghostscript
+deploy: build/ghostscript
 	cp template.yml build ;\
 		cd build ;\
 		aws cloudformation package --template-file template.yml --s3-bucket $(DEPLOYMENT_BUCKET) --s3-prefix $(STACK_NAME) --output-template-file ../package.yml ;\
