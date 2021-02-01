@@ -1,5 +1,5 @@
 BASE_NAME=ghostscript
-VERSION=9.26
+VERSION=9.53.3
 SHORT:=$(subst .,,$(VERSION))
 STACK_NAME:=$(BASE_NAME)-lambda-layer
 
@@ -32,7 +32,7 @@ build/ghostscript: check_vars build/ghostscript/bin build/ghostscript/lib
 deploy: build/ghostscript
 	cp template.yml build ;\
 		cd build ;\
-		aws cloudformation package --template-file template.yml --s3-bucket $(DEPLOYMENT_BUCKET) --s3-prefix $(STACK_NAME) --output-template-file ../package.yml ;\
+		aws cloudformation package --template-file template.yml --s3-bucket $(DEPLOYMENT_BUCKET) --s3-prefix lambda/$(STACK_NAME) --output-template-file ../package.yml ;\
 		cd ..
 	aws cloudformation deploy --template-file package.yml --stack-name $(STACK_NAME)
 	aws cloudformation describe-stacks --stack-name $(STACK_NAME) --query Stacks[].Outputs[].OutputValue --output text
